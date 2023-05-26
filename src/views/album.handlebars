@@ -1,0 +1,99 @@
+
+<div id="main-content">
+    <header>
+        <!-- <nav class="main-content__header-nav">
+            <i class="fas fa-bars bars-left"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-right"></i>
+        </nav> -->
+
+
+        {{!-- <form action="/search" method="get"> --}}
+            <div class="main-content__search-form">
+                <i class="fas fa-search search-btn" onclick="searchForm()"></i>
+                <input type="text" class="search-input" name="q" placeholder="Search for artist, songs.....">
+                <select name="selectType" id="selectType">
+                    <option value="track">Track</option>
+                    <option value="artist">Artist</option>
+                    {{!-- <option value="playlist">Playlist</option> --}}
+                    <option value="album">Albums</option>
+                </select>
+            </div>
+            {{!--
+        </form> --}}
+
+
+        <i class="fas fa-bars bars-right"></i>
+    </header>
+
+    {{!-- <p class="main-content__des">What's hot<span><img src="/img/fire.png" alt="" width="16px" height="17px"></span></p>
+    <div class="main-content__trend">
+        <div class="main-content__trend-title">Trending</div>
+        <div class="main-content__trend-more btn-hover">
+            More
+            <span><i class="fas fa-chevron-right"></i></span>
+        </div>
+    </div>
+    <div class="main-content__banner">
+        <p class="main-content__banner-artist">Artist</p>
+        <h4 class="main-content__banner-des">On Top Of The World</h4>
+        <div class="main-content__banner-btn">
+            <button class="play-btn">PLAY</button>
+            <button class="follow-btn">FOLLOW</button>
+        </div>
+        <span class="main-content__view">Monthly listeners
+            <p>50.000</p>
+        </span>
+    </div> --}}
+    <div class="my-playlist" style="height: 58rem;">
+        <div class="playlist-head">
+            <h4>New Release</h4>
+            {{!-- <a class="btn-hover">Show all</a> --}}
+        </div>
+        <div class="playlist-list">
+            <div class="playlist playlist-list__title">
+                <p class="playlist__number">#</p>
+                <p class="playlist__title">TITLE</p>
+                <p class="playlist__artist">ARTIST</p>
+                <p class="playlist__time">TIME</p>
+            </div>
+        </div>
+    </div>
+
+    {{!-- <div class="play-song">
+        <div class="play-control">
+            <div class="play-control__act">
+                <i class="far fa-heart" id='heart'></i>
+                <i class="fas fa-music"></i>
+                <i class="fas fa-expand-alt"></i>
+            </div>
+            <div class="play-control__main">
+                <i class="fas fa-redo-alt play-repeat"></i>
+                <i class="fas fa-fast-backward play-backward main-icon"></i>
+                <!-- <i class="fas fa-pause-circle pause-icon main-icon main-icon--big"></i> -->
+                <span class="play-inner">
+                    <i class="fas fa-play-circle play-icon main-icon main-icon--big"></i>
+                </span>
+                <i class="fas fa-fast-forward play-forward main-icon"></i>
+                <i class="fas fa-random shuffle-song"></i>
+            </div>
+            <div class="play-control__volume">
+                <span class="volume-inner">
+                    <i class="fas fa-volume-down"></i>
+                </span>
+                <input type="range" id="volume" class="volume" max="1" min="0" step="0.1"
+                    onchange="changeVolume(this.value)">
+                <!-- <i class="fas fa-volume-up"></i> -->
+
+            </div>
+        </div>
+        <div class="play-seekbar">
+            <div class="timer__left">0:00</div>
+            <input type="range" name="range" id="range" class="range" />
+            <audio src="/mp3/ntt.mp3" id="song"></audio>
+            <div class="timer__right">0.00</div>
+        </div>
+    </div> --}}
+</div>
+
+{{!-- <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/0OYyivKo7eLtmHzYagW60S?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe> --}}
