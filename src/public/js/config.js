@@ -6,6 +6,7 @@ function millisToMinutesAndSeconds(millis) {
     return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
 }
 
+// Fetch to Spotify api and return data;
 const apiController = (function () {
 
     // Get AccessToken;
@@ -110,6 +111,41 @@ const apiController = (function () {
         return data;
     }
 
+    // Get artist top tracks;
+    // const _getArtistTopTracks = async (token) => {
+    //     const res = await fetch('https://api.spotify.com/v1/artists/2Xlia1jlI7JDki4Xa42uyK/top-tracks?market=VN', {
+    //         method: 'GET',
+    //         headers: {
+    //             'Authorization': 'Bearer ' + token,
+    //         },
+    //     })
+    //     const data = res.json();
+    //     return data;
+    // }
+
+    // Get user like track;
+    const _getUserTracks = async (token) => {
+        const res = await fetch('https://api.spotify.com/v1/me/tracks', {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            },
+        })
+        const data = res.json();
+        return data;
+    }
+
+    // Get device id;
+    const _deviceId = async (token) => {
+        const res = await fetch('https://api.spotify.com/v1/me/player/devices', {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            }
+        })
+        const data = res.json();
+        return data;
+    }
 
     return {
         getToken() {
@@ -127,9 +163,20 @@ const apiController = (function () {
         newRelease(token) {
             return _newRelease(token);
         },
+        deviceId(token) {
+            return _deviceId(token);
+        },
+        // getArtistTopTracks(token){
+        //     return _getArtistTopTracks(token);
+        // },
+        getUserTracks(token) {
+            return _getUserTracks(token);
+        }
     }
 })();
 
+
+// Get releases from Spotify and return them to screen;
 async function releases() {
     const token = await apiController.getToken();
     console.log(token);
@@ -151,9 +198,37 @@ async function releases() {
     }
 
 }
-releases();
 
-// Get User Track;
+// Get user like track list;
+async function userTracks() {
+    const token = await apiController.getToken();
+
+    const tracks = await apiController.getUserTracks(token);
+    console.log(tracks);
+
+    const listPlaylists = document.querySelector('.playlist-list');
+    listPlaylists.innerHTML = "";
+
+    const lengthTracks = tracks.total;
+    for (let i = 0; i < lengthTracks; i++) {
+        const timer = millisToMinutesAndSeconds(tracks.items[i].track.duration_ms);
+        const uri = tracks.items[i].track.uri;
+
+        listPlaylists.innerHTML += `<div class="playlist playlist--hover">
+            <p class="playlist__number" name=${lengthTracks}>${[i + 1]}</p>
+            <p class="playlist__title">${tracks.items[i].track.name}</p>
+            
+            <p class="playlist__time">${timer}</p>
+
+            <span class="play-inner-track${[i + 1]}" name=${uri}>
+                <i class="fas fa-play-circle play-icon main-icon main-icon--big"></i>
+            </span>
+        </div>`;
+
+    }
+    // <p class="playlist__artist">${tracks.items[i].track.artists[i].name}</p>
+}
+userTracks();
 
 // Search music from input and type music;
 async function searchForm() {
@@ -173,16 +248,18 @@ async function searchForm() {
 
         for (let i = 0; i < length; i++) {
             const timer = millisToMinutesAndSeconds(search.tracks.items[i].duration_ms);
+            const uri = search.tracks.items[i].uri;
             listQuery.innerHTML += `<div class="playlist playlist--hover">
                 <p class="playlist__number">${[i + 1]}</p>
                 <p class="playlist__title">${search.tracks.items[i].name}</p>
                 <p class="playlist__artist">${search.tracks.items[i].artists[0].name}</p>
                 <p class="playlist__time">${timer}</p>
+                <span class="play-inner-track${[i + 1]}" name=${uri}>
+                <i class="fas fa-play-circle play-icon main-icon main-icon--big"></i>
+            </span>
             </div>`;
         }
     }
-
-    // Get artist list;
 
     // Get albums list;
     function getAlbums() {
@@ -204,17 +281,12 @@ async function searchForm() {
     // Get data from search options;
     switch (selectType) {
         case 'track':
-            // console.log(search.tracks.items.length);
             getDataOfTrack();
             break;
 
         case 'artist':
             console.log(search.artists);
             break;
-
-        // case 'playlist':
-        //     console.log(search.playlists);
-        //     break;
 
         case 'album':
             getAlbums();
@@ -225,4 +297,3 @@ async function searchForm() {
             break;
     }
 }
-

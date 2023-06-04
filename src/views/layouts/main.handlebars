@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,38 +12,40 @@
     <link rel="stylesheet" href="/img">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap"
+        rel="stylesheet">
 
+    <script src="/js/login.js"></script>
     {{!-- web playback sdk spotify --}}
-    {{!-- <script src="https://sdk.scdn.co/spotify-player.js"></script> --}}
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
+    <script src="/js/config.js"></script>
+    <script src="/js/playSong.js"></script>
 </head>
 
 <body>
-    
-<div id="main">
-    <div id="container" >
-        <!--
+
+    <div id="main">
+
+        <div id="container">
+            <!--
             =======================NAVBAR==========================
         -->
-        {{> navbar}}
-       
-        <!--
+            {{> navbar}}
+
+            <!--
             ====================MAIN_CONTENT=====================
         -->
-        {{{body}}}
+            {{{body}}}
 
 
-        <!--
+            <!--
             ====================SIDE-BAR=========================
         -->
-        {{> sidebar}}
+            {{> sidebar}}
 
+        </div>
     </div>
-</div>
     <script src="/js/main.js"></script>
-    <script src="/js/config.js"></script>
-
-    {{!-- <script src="/js/releaseAlbums.js"></script> --}}
-
 </body>
+
 </html>

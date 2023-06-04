@@ -1,7 +1,6 @@
 const homeRoute = require('./homeRoute');
 const albumRoute = require('./albumRoute');
 const authRoute = require('./authRoute');
-const tokenRoute = require('./tokenRoute');
 
 function route(app) {
 
@@ -12,7 +11,6 @@ function route(app) {
     // Home;
     app.use('/', homeRoute);
     
-
 }
 
 module.exports = route;
